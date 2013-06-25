@@ -1,0 +1,1 @@
+Drop here DotNetClient_N2.dll and DotNetClient_N2.pdb from the Lightstreamer .NET Client Library.

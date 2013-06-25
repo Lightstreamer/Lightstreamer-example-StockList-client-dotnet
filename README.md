@@ -29,7 +29,9 @@ The example is comprised of the following source code and image files:
 * Properties/*
 * Images/*
 
-Once you have generated the Demo Client binaries (DotNetClientDemo_N2.exe) you should create a deploy folder, let's call it "Deployment", and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (DotNetClient_N2.dll, DotNetClient_N2.pdb) from the [Lightstreamer 5 Colosseo distribution](http://www.lightstreamer.com/download) and put them in the "Deployment" folder.
+To recompile the provided source, you just need to create a project for a Windows Application target, then include the source and include references to the .NET Client API for Lightstreamer binaries files DotNetClient_N2.dll and DotNetClient_N2.pdb from the [Lightstreamer 5 Colosseo distribution](http://www.lightstreamer.com/download) (DOCS-SDKs/sdk_adapter_dotnet/lib/ folder).
+
+Once you have generated the Demo Client binaries (DotNetClientDemo_N2.exe) you should create a deploy folder, let's call it "Deployment", and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (see above) and put them in the "Deployment" folder.
 Now you can prepare a  DotNetClient.bat launch script such this:
 ```cmd
 @echo off
