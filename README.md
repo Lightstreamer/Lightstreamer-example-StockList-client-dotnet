@@ -73,4 +73,4 @@ See Also
 Lightstreamer Compatibility Notes
 ---------------------------------
 
-- Compatible with Lightstreamer .NET Client Library version 2.1.4588.28986 or newer.
+- Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
