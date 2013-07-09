@@ -1,6 +1,9 @@
 
-Lightstreamer StockList Demo Client for .NET
-============================================
+# Lightstreamer StockList Demo Client for .NET #
+
+This project contains a full example of a .NET client application that employs the .NET client library.
+
+## .NET Stock-List Demo ##
 
 <table>
   <tr>
@@ -10,7 +13,7 @@ Lightstreamer StockList Demo Client for .NET
     </td>
     <td>
       &nbsp;Click here to download and install the application:<br>
-      &nbsp;<a href="http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi" target="_blank">http://www.lightstreamer.com/demo/Flash_StockListDemo_Basic/</a>
+      &nbsp;<a href="http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi" target="_blank">http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi</a>
     </td>
   </tr>
 </table>
@@ -20,16 +23,18 @@ This is a .NET version of the [Stock-List Demos](https://github.com/Weswit/Light
 This app uses the <b>.NET Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
 
+# Build #
 
-Build and Run the Demo
-----------------------
+If you want to skip the build and deploy processes of this demo please note that you can download a Windows Installer ([DotNetClientDemo_N2.msi](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)) and run locally the demo.
 
 The example is comprised of the following source code and image files:
 * Source/*
 * Properties/*
 * Images/*
 
-To recompile the provided source, you just need to create a project for a Windows Application target, then include the source and include references to the .NET Client API for Lightstreamer binaries files DotNetClient_N2.dll and DotNetClient_N2.pdb from the [Lightstreamer 5 Colosseo distribution](http://www.lightstreamer.com/download) (DOCS-SDKs/sdk_adapter_dotnet/lib/ folder).
+To recompile the provided source, you just need to create a project for a Windows Application target, then include the source and include references to the .NET Client API for Lightstreamer binaries files DotNetClient_N2.dll and DotNetClient_N2.pdb from the [latest Lightstreamer  distribution](http://www.lightstreamer.com/download). You can find it in "/DOCS-SDKs/sdk_adapter_dotnet/lib" folder.
+
+# Deploy #
 
 Once you have generated the Demo Client binaries (DotNetClientDemo_N2.exe) you should create a deploy folder, let's call it "Deployment", and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (see above) and put them in the "Deployment" folder.
 Now you can prepare a  DotNetClient.bat launch script such this:
@@ -63,14 +68,21 @@ The DotNetClientDemo_N2 executable can also be run by double-clicking it; in its
 In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) and [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) have to be deployed in your local Lightstreamer server instance. The factory configuration of Lightstreamer server already provides this adapter deployed.<br>
 
 
-See Also
---------
+# See Also #
 
-* [Lightstreamer StockList Demo Client for JavaScript](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
+## Lightstreamer Adapters needed by this demo ##
+
 * [Lightstreamer StockList Demo Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
 * [Lightstreamer Reusable Metadata Adapter in Java](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java)
 
-Lightstreamer Compatibility Notes
----------------------------------
+## Similar demo clients that may interest you ##
+
+* [Lightstreamer StockList Demo Client for JavaScript](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
+* [Lightstreamer StockList Demo Client for jQuery](https://github.com/Weswit/Lightstreamer-example-StockList-client-jquery)
+* [Lightstreamer StockList Demo Client for Dojo](https://github.com/Weswit/Lightstreamer-example-StockList-client-dojo)
+* [Lightstreamer StockList Demo Client for Java SE](https://github.com/Weswit/Lightstreamer-example-StockList-client-java)
+* [Lightstreamer Portfolio Demo Client for Adobe Flex SDK](https://github.com/Weswit/Lightstreamer-example-Portfolio-client-flex)
+
+# Lightstreamer Compatibility Notes #
 
 - Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
