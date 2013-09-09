@@ -74,6 +74,7 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 
 * [Lightstreamer StockList Demo Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
 * [Lightstreamer Reusable Metadata Adapter in Java](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java)
+* [Lightstreamer StockList Demo Adapter for .NET](https://github.com/Weswit/Lightstreamer-example-StockList-adapter-dotnet)
 
 ## Similar demo clients that may interest you ##
 
