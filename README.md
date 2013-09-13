@@ -87,3 +87,4 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 # Lightstreamer Compatibility Notes #
 
 - Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
+- For Lightstreamer Allegro+, Presto, Vivace.
