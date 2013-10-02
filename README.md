@@ -1,4 +1,3 @@
-
 # Lightstreamer StockList Demo Client for .NET #
 
 This project contains a full example of a .NET client application that employs the .NET client library.
@@ -8,7 +7,7 @@ This project contains a full example of a .NET client application that employs t
 <table>
   <tr>
     <td style="text-align: left">
-      &nbsp;<a href="http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi" target="_blank"><img src="http://www.lightstreamer.com/img/demo/screen_dotnet.png"></a>&nbsp;
+      &nbsp;<a href="http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi" target="_blank"><img src="screen_dotnet.png"></a>&nbsp;
       
     </td>
     <td>
@@ -87,4 +86,4 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 # Lightstreamer Compatibility Notes #
 
 - Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
-- For Lightstreamer Allegro+, Presto, Vivace.
+- For Lightstreamer Allegro (+ .NET Client API support), Presto, Vivace.
