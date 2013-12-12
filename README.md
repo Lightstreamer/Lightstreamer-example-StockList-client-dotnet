@@ -15,7 +15,7 @@ This project contains a full example of a .NET client application that employs t
   </tr>
 </table>
 
-This is a .NET version of the [Lightstreamer- Stock-List Demos - HTML Clients](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript), where thirty items are subscribed to.<br>
+This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Client](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript#basic-stock-list-demo---html-client), where thirty items are subscribed to.<br>
 
 This app uses the <b>.NET Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
