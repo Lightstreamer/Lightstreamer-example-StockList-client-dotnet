@@ -1,5 +1,5 @@
 # Lightstreamer - Basic Stock-List Demo - .NET Client #
-<!-- START DESCRIPTION Basic Stock-List Demo -->
+<!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
 This project contains a full example of a .NET client application that employs the .NET client library.
 
@@ -20,7 +20,7 @@ This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Clien
 
 This app uses the <b>.NET Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
-<!-- END DESCRIPTION Basic Stock-List Demo -->
+<!-- END DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
 # Build #
 
