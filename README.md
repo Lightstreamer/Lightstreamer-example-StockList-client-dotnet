@@ -1,4 +1,5 @@
 # Lightstreamer - Basic Stock-List Demo - .NET Client #
+<!-- START DESCRIPTION Basic Stock-List Demo -->
 
 This project contains a full example of a .NET client application that employs the .NET client library.
 
@@ -19,6 +20,7 @@ This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Clien
 
 This app uses the <b>.NET Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
+<!-- END DESCRIPTION Basic Stock-List Demo -->
 
 # Build #
 
@@ -68,11 +70,13 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 # See Also #
 
 ## Lightstreamer Adapters needed by this demo ##
+<!-- START RELATED_ENTRIES -->
 
 * [Lightstreamer - Stock-List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
 * [Lightstreamer - Reusable Metadata Adapters - Java Adapter](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java)
 * [Lightstreamer - Stock-List Demo - .NET Adapter](https://github.com/Weswit/Lightstreamer-example-StockList-adapter-dotnet)
 
+<!-- END RELATED_ENTRIES -->
 ## Similar demo clients that may interest you ##
 
 * [Lightstreamer - Stock-List Demos - HTML Clients](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
