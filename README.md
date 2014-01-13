@@ -1,20 +1,8 @@
 # Lightstreamer - Basic Stock-List Demo - .NET Client #
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
-This project contains a full example of a .NET client application that employs the .NET client library.
+This project contains a full example of a .NET client application that employs the [.NET client API for Lightstreamer](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html).
 
-<table>
-  <tr>
-    <td style="text-align: left">
-      &nbsp;<a href="http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi" target="_blank"><img src="screen_dotnet.png"></a>&nbsp;
-      
-    </td>
-    <td>
-      &nbsp;Click here to download and install the application:<br>
-      &nbsp;<a href="http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi" target="_blank">http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi</a>
-    </td>
-  </tr>
-</table>
 [![screenshot](screen_dotnet_large.png)](http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi)<br>
 Click here to download and install the application: [http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi](http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi)
 
