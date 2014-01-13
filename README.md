@@ -15,6 +15,8 @@ This project contains a full example of a .NET client application that employs t
     </td>
   </tr>
 </table>
+[![screenshot](screen_dotnet_large.png)](http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi)<br>
+Click here to download and install the application: [http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi](http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi)
 
 This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Client](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript#basic-stock-list-demo---html-client), where thirty items are subscribed to.<br>
 
@@ -66,10 +68,9 @@ pause
 The DotNetClientDemo_N2 executable can also be run by double-clicking it; in its default configuration, the client will try to connect to Lightstreamer server at http://localhost:80.
 In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) and [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) have to be deployed in your local Lightstreamer server instance. The factory configuration of Lightstreamer server already provides this adapter deployed.<br>
 
-
 # See Also #
 
-## Lightstreamer Adapters needed by this demo ##
+## Lightstreamer Adapters Needed by These Demo Clients ##
 <!-- START RELATED_ENTRIES -->
 
 * [Lightstreamer - Stock-List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
@@ -77,7 +78,7 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 * [Lightstreamer - Stock-List Demo - .NET Adapter](https://github.com/Weswit/Lightstreamer-example-StockList-adapter-dotnet)
 
 <!-- END RELATED_ENTRIES -->
-## Similar demo clients that may interest you ##
+## Related Projects ##
 
 * [Lightstreamer - Stock-List Demos - HTML Clients](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
 * [Lightstreamer - Basic Stock-List Demo - jQuery (jqGrid) Client](https://github.com/Weswit/Lightstreamer-example-StockList-client-jquery)
