@@ -3,8 +3,8 @@
 
 This project contains a full example of a .NET client application that employs the [.NET client API for Lightstreamer](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html).
 
-[![screenshot](screen_dotnet_large.png)](http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi)<br>
-Click here to download and install the application: [http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi](http://www.lightstreamer.com/demo/DotNetDemo/DotNetClientDemo_N2.msi)
+[![screenshot](screen_dotnet_large.png)](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
+Click here to download and install the application: [http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)
 
 This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Client](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript#basic-stock-list-demo---html-client), where thirty items are subscribed to.<br>
 
