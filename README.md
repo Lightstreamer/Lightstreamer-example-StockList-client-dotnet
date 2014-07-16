@@ -1,10 +1,16 @@
-# Lightstreamer - Basic Stock-List Demo - .NET Client #
+# Lightstreamer - Basic Stock-List Demo - .NET Client
+
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
 This project contains a full example of a .NET client application that employs the [.NET client API for Lightstreamer](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html).
 
+## Live Demo
+
 [![screenshot](screen_dotnet_large.png)](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
-Click here to download and install the application: [http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)
+###[![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
+(download DotNetClientDemo_N2.msi; launch it; follow the instructions)
+
+## Details
 
 This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Client](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript#basic-stock-list-demo---html-client), where thirty items are subscribed to.<br>
 
@@ -12,7 +18,17 @@ This app uses the <b>.NET Client API for Lightstreamer</b> to handle the communi
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
 <!-- END DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
-# Build #
+## Install 
+
+If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
+
+* Note that, as prerequisite, the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
+* Launch Lightstreamer Server.
+* Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Weswit/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract the application installer (a ".msi" file).
+* Execute the downloaded file `DotNetClientDemo_Local_N2.msi` to install the application.
+* From the Start menu, go to the "Lightstreamer .NET Stock-List Demo" folder, click the "DotNetStockListDemo.exe" link.
+
+## Build
 
 If you want to skip the build and deploy processes of this demo please note that you can download a Windows Installer ([DotNetClientDemo_N2.msi](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)) and run locally the demo.
 
@@ -23,7 +39,7 @@ The example is comprised of the following source code and image files:
 
 To recompile the provided source, you just need to create a project for a Windows Application target, then include the source and include references to the .NET Client API for Lightstreamer binaries files DotNetClient_N2.dll and DotNetClient_N2.pdb from the [latest Lightstreamer  distribution](http://www.lightstreamer.com/download). You can find it in "/DOCS-SDKs/sdk_adapter_dotnet/lib" folder.
 
-# Deploy #
+### Deploy
 
 Once you have generated the Demo Client binaries (DotNetClientDemo_N2.exe) you should create a deploy folder, let's call it "Deployment", and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (see above) and put them in the "Deployment" folder.
 Now you can prepare a  DotNetClient.bat launch script such this:
