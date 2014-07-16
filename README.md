@@ -30,19 +30,18 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 ## Build
 
-If you want to skip the build and deploy processes of this demo please note that you can download a Windows Installer ([DotNetClientDemo_N2.msi](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)) and run locally the demo.
 
-The example is comprised of the following source code and image files:
-* Source/*
-* Properties/*
-* Images/*
+To build your own version of the `DotNetStockListDemo.exe` executable, instead of using the one provided in the `deploy.zip` file from the Install section above, the example is comprised of the following source code and image files:
+* `Source/*`
+* `Properties/*`
+* `Images/*`
 
-To recompile the provided source, you just need to create a project for a Windows Application target, then include the source and include references to the .NET Client API for Lightstreamer binaries files DotNetClient_N2.dll and DotNetClient_N2.pdb from the [latest Lightstreamer  distribution](http://www.lightstreamer.com/download). You can find it in "/DOCS-SDKs/sdk_adapter_dotnet/lib" folder.
+To recompile the provided sources, you just need to create a project for a <b>Windows Application target</b>, then include the sources and include references to the .NET Client API for Lightstreamer binaries files `DotNetClient_N2.dll` and `DotNetClient_N2.pdb` from the [latest Lightstreamer  distribution](http://www.lightstreamer.com/download). You can find it in `/DOCS-SDKs/sdk_adapter_dotnet/lib` folder.
 
 ### Deploy
 
-Once you have generated the Demo Client binaries (DotNetClientDemo_N2.exe) you should create a deploy folder, let's call it "Deployment", and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (see above) and put them in the "Deployment" folder.
-Now you can prepare a  DotNetClient.bat launch script such this:
+Once you have generated the Demo Client binaries (`DotNetClientDemo_N2.exe`) you should create a deploy folder, let's call it `Deployment`, and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (see above) and put them in the `Deployment` folder.
+Now you can prepare a  `DotNetClient.bat` launch script such this:
 ```cmd
 @echo off
 
@@ -69,12 +68,12 @@ popd
 pause
 ```
 
-The DotNetClientDemo_N2 executable can also be run by double-clicking it; in its default configuration, the client will try to connect to Lightstreamer server at http://localhost:80.
+The `DotNetClientDemo_N2` executable can also be run by double-clicking it; in its default configuration, the client will try to connect to Lightstreamer server at http://localhost:80.
 In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) and [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) have to be deployed in your local Lightstreamer server instance. The factory configuration of Lightstreamer server already provides this adapter deployed.<br>
 
-# See Also #
+## See Also
 
-## Lightstreamer Adapters Needed by These Demo Clients ##
+### Lightstreamer Adapters Needed by These Demo Clients
 <!-- START RELATED_ENTRIES -->
 
 * [Lightstreamer - Stock-List Demo - Java Adapter](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java)
@@ -82,7 +81,7 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 * [Lightstreamer - Stock-List Demo - .NET Adapter](https://github.com/Weswit/Lightstreamer-example-StockList-adapter-dotnet)
 
 <!-- END RELATED_ENTRIES -->
-## Related Projects ##
+### Related Projects
 
 * [Lightstreamer - Stock-List Demos - HTML Clients](https://github.com/Weswit/Lightstreamer-example-Stocklist-client-javascript)
 * [Lightstreamer - Basic Stock-List Demo - jQuery (jqGrid) Client](https://github.com/Weswit/Lightstreamer-example-StockList-client-jquery)
@@ -90,7 +89,7 @@ In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example
 * [Lightstreamer - Basic Stock-List Demo - Java SE (Swing) Client](https://github.com/Weswit/Lightstreamer-example-StockList-client-java)
 * [Lightstreamer - Portfolio Demo - Flex Client](https://github.com/Weswit/Lightstreamer-example-Portfolio-client-flex)
 
-# Lightstreamer Compatibility Notes #
+## Lightstreamer Compatibility Notes
 
-- Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
-- For Lightstreamer Allegro (+ .NET Client API support), Presto, Vivace.
+* Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
+* For Lightstreamer Allegro (+ .NET Client API support), Presto, Vivace.
