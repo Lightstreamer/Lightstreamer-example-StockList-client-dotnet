@@ -26,7 +26,7 @@ If you want to install a version of this demo pointing to your local Lightstream
 * Launch Lightstreamer Server.
 * Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Weswit/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract the application installer (a ".msi" file).
 * Execute the downloaded file `DotNetClientDemo_Local_N2.msi` to install the application.
-* From the Start menu, go to the "Lightstreamer .NET Stock-List Demo" folder, click the "DotNetStockListDemo.exe" link.
+* From the Start menu, go to the "Lightstreamer .NET Stock-List Demo" folder, and click the "DotNetStockListDemo.exe" link.
 
 ## Build
 
@@ -40,8 +40,8 @@ To recompile the provided sources, you just need to create a project for a <b>Wi
 
 ### Deploy
 
-Once you have generated the Demo Client binaries (`DotNetClientDemo_N2.exe`) you should create a deploy folder, let's call it `Deployment`, and copy the binaries here. Then get the .NET Client API for Lightstreamer binaries files (see above) and put them in the `Deployment` folder.
-Now you can prepare a  `DotNetClient.bat` launch script such this:
+Once you have generated the Demo Client binaries (`DotNetClientDemo_N2.exe`), you should create a deploy folder, let's call it `Deployment`, and copy the binaries here. Then, get the .NET Client API for Lightstreamer binaries files (see above) and put them in the `Deployment` folder.
+Now you can prepare a `DotNetClient.bat` launch script such as this:
 ```cmd
 @echo off
 
@@ -69,7 +69,7 @@ pause
 ```
 
 The `DotNetClientDemo_N2` executable can also be run by double-clicking it; in its default configuration, the client will try to connect to Lightstreamer server at http://localhost:80.
-In this case the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) and [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) have to be deployed in your local Lightstreamer server instance. The factory configuration of Lightstreamer server already provides this adapter deployed.<br>
+In this case, the [QUOTE_ADAPTER](https://github.com/Weswit/Lightstreamer-example-Stocklist-adapter-java) and [LiteralBasedProvider](https://github.com/Weswit/Lightstreamer-example-ReusableMetadata-adapter-java) have to be deployed in your local Lightstreamer server instance. The factory configuration of Lightstreamer server already provides this adapter deployed.<br>
 
 ## See Also
 
