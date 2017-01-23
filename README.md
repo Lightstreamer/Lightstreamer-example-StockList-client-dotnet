@@ -2,7 +2,7 @@
 
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
-This project contains a full example of a .NET client application that employs the [.NET PCL client API for Lightstreamer](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html).
+This project contains a full example of a .NET client application that employs the [.NET PCL client API for Lightstreamer](http://www.lightstreamer.com/api/ls-pcl-client/latest/).
 
 ## Live Demo
 
