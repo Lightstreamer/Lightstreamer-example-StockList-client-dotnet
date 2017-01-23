@@ -2,7 +2,7 @@
 
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
-This project contains a full example of a .NET client application that employs the [.NET client API for Lightstreamer](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html).
+This project contains a full example of a .NET client application that employs the [.NET PCL client API for Lightstreamer](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html).
 
 ## Live Demo
 
@@ -12,9 +12,9 @@ This project contains a full example of a .NET client application that employs t
 
 ## Details
 
-This is a .NET version of the [Lightstreamer- Basic Stock-List Demo - HTML Client](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-client-javascript#basic-stock-list-demo---html-client), where thirty items are subscribed to.<br>
+This is a .NET desktop version of the [Lightstreamer- Basic Stock-List Demo - HTML Client](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-client-javascript#basic-stock-list-demo---html-client), where thirty items are subscribed to.<br>
 
-This app uses the <b>.NET Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
+This app uses the <b>.NET PCL Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
 <!-- END DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
@@ -36,11 +36,14 @@ To build your own version of the `DotNetStockListDemo.exe` executable, instead o
 * `Properties/*`
 * `Images/*`
 
-To recompile the provided sources, you just need to create a project for a <b>Windows Application target</b>, then include the sources and include references to the .NET Client API for Lightstreamer binaries files `DotNetClient_N2.dll` and `DotNetClient_N2.pdb` from the [latest Lightstreamer  distribution](http://www.lightstreamer.com/download). You can find it in `/DOCS-SDKs/sdk_adapter_dotnet/lib` folder.
+To recompile the provided sources, you just need to create a project for a <b>Windows Application target</b>, then include the sources and include reference to the .NET PCL Client library.
+You can download binaries files of the library (`Lightstreamer_DotNet_PCL_Client.dll` and `Lightstreamer_DotNet_PCL_Client.pdb`) from NuGet [Lightstreamer.DotNet.Client](https://www.nuget.org/packages/Lightstreamer.DotNet.Client/) or use directly the Package Manager Console:
+	`Install-Package Lightstreamer.DotNet.Client`
+ 
 
 ### Deploy
 
-Once you have generated the Demo Client binaries (`DotNetClientDemo_N2.exe`), you should create a deploy folder, let's call it `Deployment`, and copy the binaries here. Then, get the .NET Client API for Lightstreamer binaries files (see above) and put them in the `Deployment` folder.
+Once you have generated the Demo Client binaries (`DotNetClientDemo_N2.exe`), you should create a deploy folder, let's call it `Deployment`, and copy the binaries here. Then, get the .NET PCL Client API for Lightstreamer binaries files (see above) and put them in the `Deployment` folder.
 Now you can prepare a `DotNetClient.bat` launch script such as this:
 ```cmd
 @echo off
@@ -92,5 +95,5 @@ the [LiteralBasedProvider](https://github.com/Lightstreamer/Lightstreamer-exampl
 
 ## Lightstreamer Compatibility Notes
 
-* Compatible with Lightstreamer .NET Client Library version 2.1 or newer.
+* Compatible with Lightstreamer .NET PCL Client Library version 3.0.0 or newer.
 * For Lightstreamer Allegro (+ .NET Client API support), Presto, Vivace.

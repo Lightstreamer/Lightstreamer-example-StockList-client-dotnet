@@ -23,6 +23,7 @@ using System.Windows.Forms;
 
 using Lightstreamer.DotNet.Client;
 using System.Threading;
+using Lightstreamer.DotNet.Client.Test;
 
 namespace DotNetStockListDemo
 {
@@ -46,6 +47,8 @@ namespace DotNetStockListDemo
             demoForm = form;
             updateDelegate = lsUpdateDelegate;
             statusChangeDelegate = lsStatusChangeDelegate;
+
+            LSClient.SetLoggerProvider(new Log4NetLoggerProviderWrapper());
 
             cInfo = new ConnectionInfo();
             cInfo.PushServerUrl = pushServerUrl;
@@ -144,7 +147,7 @@ namespace DotNetStockListDemo
             //would fail again and again (btw this should never happen)
 
             try
-            {
+            { 
                 SimpleTableInfo tableInfo = new SimpleTableInfo(
                     "item1 item2 item3 item4 item5 item6 item7 item8 item9 item10 item11 item12 item13 item14 item15 item16 item17 item18 item19 item20 item21 item22 item23 item24 item25 item26 item27 item28 item29 item30",
                     "MERGE",
@@ -156,13 +159,15 @@ namespace DotNetStockListDemo
                     tableInfo,
                     new StocklistHandyTableListener(this, this.phase),
                     false);
-
             }
             catch (SubscrException)
             {
             }
-            catch (PushServerException)
+            catch (PushServerException e)
             {
+                demoForm.Invoke(statusChangeDelegate, new Object[] {
+                        StocklistConnectionListener.VOID, e.Message
+                    });
             }
             catch (PushUserException)
             {
@@ -173,5 +178,4 @@ namespace DotNetStockListDemo
         }
 
     }
-
 }
