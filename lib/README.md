@@ -1,2 +1,0 @@
-This folder should contain the library files needed to build the Demo.
-Please drop here the DotNetClient_N2.dll and DotNetClient_N2.pdb files from the Lightstreamer .NET Client Library, you can find it in LS_HOME/DOCS-SDKs/sdk_client_dotnet/lib.
