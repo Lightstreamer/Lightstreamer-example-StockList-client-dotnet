@@ -101,7 +101,7 @@ namespace DotNetStockListDemo
         {
             if (ph != this.phase)
                 return;
-            demoForm.Invoke(updateDelegate, new Object[] { itemPos, update });
+            demoForm.BeginInvoke(updateDelegate, new Object[] { itemPos, update });
         }
     
         private void connect(int ph) {
