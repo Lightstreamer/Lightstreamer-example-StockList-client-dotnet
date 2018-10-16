@@ -7,7 +7,7 @@ This project contains a full example of a .NET Framework client application that
 ## Live Demo
 
 [![screenshot](screen_dotnet_large.png)](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
-###[![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
+### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
 (download DotNetClientDemo_N2.msi; launch it; follow the instructions)
 
 ## Details
@@ -96,4 +96,5 @@ the [LiteralBasedProvider](https://github.com/Lightstreamer/Lightstreamer-exampl
 ## Lightstreamer Compatibility Notes
 
 * Compatible with Lightstreamer .NET Standard Client Library version 4.0.0 or newer.
-* For Lightstreamer Allegro (+ .NET Client API support), Presto, Vivace.
+* Ensure that .NET Standard Client API is supported by Lightstreamer Server license configuration.
+
