@@ -53,7 +53,7 @@ namespace DotNetStockListDemo
             cInfo = new ConnectionInfo
             {
                 PushServerUrl = pushServerUrl,
-                Adapter = "WELCOME",
+                Adapter = "DEMO",
                 ConnectTimeoutMillis = 500,
                 ReadTimeoutMillis = 8000
             };
@@ -158,7 +158,7 @@ namespace DotNetStockListDemo
                     "stock_name last_price time pct_change bid_quantity bid ask ask_quantity min max ref_price open_price",
                     true)
                 {
-                    DataAdapter = "STOCKS"
+                    DataAdapter = "QUOTE_ADAPTER"
                 };
 
                 client.SubscribeTable(
