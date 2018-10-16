@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Lightstreamer.DotNet.Client;
+using Lightstreamer.DotNetStandard.Client;
 
 namespace DotNetStockListDemo
 {

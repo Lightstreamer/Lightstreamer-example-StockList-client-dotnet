@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-using Lightstreamer.DotNet.Client;
+using Lightstreamer.DotNetStandard.Client;
 
 namespace DotNetStockListDemo
 {
@@ -75,25 +75,25 @@ namespace DotNetStockListDemo
             }
         }
 
-        private void onDisconnection(String status) {
+        private void OnDisconnection(String status) {
             this.slClient.StatusChanged(this.phase, DISCONNECTED, status);
             this.slClient.Start(this.phase);
         }
 
         public void OnClose() {
-            this.onDisconnection("Connection closed");
+            this.OnDisconnection("Connection closed");
         }
 
 		public void OnEnd(int cause) {
-            this.onDisconnection("Connection forcibly closed");
+            this.OnDisconnection("Connection forcibly closed");
 		}
 
         public void OnFailure(PushServerException e) {
-            this.onDisconnection("Server failure");
+            this.OnDisconnection("Server failure");
         }
 
         public void OnFailure(PushConnException e) {
-            this.onDisconnection("Connection failure");
+            this.OnDisconnection("Connection failure");
         }
     }
 

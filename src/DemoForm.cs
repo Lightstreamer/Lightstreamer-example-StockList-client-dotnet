@@ -27,7 +27,7 @@ using System.Threading;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-using Lightstreamer.DotNet.Client;
+using Lightstreamer.DotNetStandard.Client;
 
 using DotNetStockListDemo.Properties;
 
@@ -74,7 +74,7 @@ namespace DotNetStockListDemo
         public DemoForm(string pushServerHost, int pushServerPort ) {
             stocklistClient = null;
             blinkingCells = new ArrayList();
-            blinkEnabled = true;
+            blinkEnabled = false;
             blinkMenu = false;
 
             pushServerUrl = "http://" + pushServerHost + ":" + pushServerPort;

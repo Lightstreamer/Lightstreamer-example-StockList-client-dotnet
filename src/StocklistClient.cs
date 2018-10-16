@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-using Lightstreamer.DotNet.Client;
+using Lightstreamer.DotNetStandard.Client;
 using System.Threading;
 using Lightstreamer.DotNet.Client.Test;
 
@@ -50,9 +50,13 @@ namespace DotNetStockListDemo
 
             LSClient.SetLoggerProvider(new Log4NetLoggerProviderWrapper());
 
-            cInfo = new ConnectionInfo();
-            cInfo.PushServerUrl = pushServerUrl;
-            cInfo.Adapter = "DEMO";
+            cInfo = new ConnectionInfo
+            {
+                PushServerUrl = pushServerUrl,
+                Adapter = "WELCOME",
+                ConnectTimeoutMillis = 500,
+                ReadTimeoutMillis = 8000
+            };
 
             client = new LSClient();
         }
@@ -75,19 +79,19 @@ namespace DotNetStockListDemo
             int ph = Interlocked.Increment(ref this.phase);
             Thread t = new Thread(new ThreadStart(delegate()
             {
-                execute(ph);
+                Execute(ph);
             }));
             t.Start();
         }
 
-        private void execute(int ph) {
+        private void Execute(int ph) {
             if (ph != this.phase)
             {
                 return;
             }
             ph = Interlocked.Increment(ref this.phase);
-            this.connect(ph);
-            this.subscribe();
+            this.Connect(ph);
+            this.Subscribe();
         }
 
         public void StatusChanged(int ph, int cStatus, string status)
@@ -101,10 +105,10 @@ namespace DotNetStockListDemo
         {
             if (ph != this.phase)
                 return;
-            demoForm.Invoke(updateDelegate, new Object[] { itemPos, update });
+            demoForm.BeginInvoke(updateDelegate, new Object[] { itemPos, update });
         }
     
-        private void connect(int ph) {
+        private void Connect(int ph) {
             bool connected = false;
             //this method will not exit until the openConnection returns without throwing an exception
             while (!connected) {
@@ -138,7 +142,7 @@ namespace DotNetStockListDemo
                 }
         }
 
-        private void subscribe() {
+        private void Subscribe() {
             //this method will try just one subscription.
             //we know that when this method executes we should be already connected
             //If we're not or we disconnect while subscribing we don't have to do anything here as an
@@ -147,13 +151,15 @@ namespace DotNetStockListDemo
             //would fail again and again (btw this should never happen)
 
             try
-            { 
+            {
                 SimpleTableInfo tableInfo = new SimpleTableInfo(
                     "item1 item2 item3 item4 item5 item6 item7 item8 item9 item10 item11 item12 item13 item14 item15 item16 item17 item18 item19 item20 item21 item22 item23 item24 item25 item26 item27 item28 item29 item30",
                     "MERGE",
                     "stock_name last_price time pct_change bid_quantity bid ask ask_quantity min max ref_price open_price",
-                    true);
-                tableInfo.DataAdapter = "QUOTE_ADAPTER";
+                    true)
+                {
+                    DataAdapter = "STOCKS"
+                };
 
                 client.SubscribeTable(
                     tableInfo,
