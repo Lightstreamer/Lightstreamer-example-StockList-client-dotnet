@@ -54,7 +54,7 @@ namespace DotNetStockListDemo
             {
                 PushServerUrl = pushServerUrl,
                 Adapter = "DEMO",
-                ConnectTimeoutMillis = 500,
+                ConnectTimeoutMillis = 3500,
                 ReadTimeoutMillis = 8000
             };
 
