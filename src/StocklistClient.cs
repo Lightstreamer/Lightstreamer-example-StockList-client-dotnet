@@ -17,13 +17,10 @@
 #endregion License
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 
-using Lightstreamer.DotNetStandard.Client;
 using System.Threading;
 using Lightstreamer.DotNet.Client.Test;
+using com.lightstreamer.client;
 
 namespace DotNetStockListDemo
 {
@@ -34,11 +31,11 @@ namespace DotNetStockListDemo
         private LightstreamerUpdateDelegate updateDelegate;
         private LightstreamerStatusChangedDelegate statusChangeDelegate;
 
-        private LSClient client;
-        private ConnectionInfo cInfo;
-
+        private LightstreamerClient client;
+        
         public StocklistClient(
                 string pushServerUrl,
+                string forceT,
                 DemoForm form,
                 LightstreamerUpdateDelegate lsUpdateDelegate,
                 LightstreamerStatusChangedDelegate lsStatusChangeDelegate)
@@ -48,17 +45,28 @@ namespace DotNetStockListDemo
             updateDelegate = lsUpdateDelegate;
             statusChangeDelegate = lsStatusChangeDelegate;
 
-            LSClient.SetLoggerProvider(new Log4NetLoggerProviderWrapper());
+            LightstreamerClient.setLoggerProvider(new Log4NetLoggerProviderWrapper());
 
-            cInfo = new ConnectionInfo
+            client = new LightstreamerClient(pushServerUrl, "DEMO");
+
+            client.connectionOptions.RetryDelay = 3500;
+            switch (forceT)
             {
-                PushServerUrl = pushServerUrl,
-                Adapter = "DEMO",
-                ConnectTimeoutMillis = 3500,
-                ReadTimeoutMillis = 8000
-            };
+                case "websocket":
+                    client.connectionOptions.ForcedTransport = "WS";
+                    break;
 
-            client = new LSClient();
+                case "http":
+                    client.connectionOptions.ForcedTransport = "HTTP";
+                    break;
+
+                case "polling":
+                    client.connectionOptions.ForcedTransport = "HTTP-POLLING";
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
 
@@ -101,7 +109,7 @@ namespace DotNetStockListDemo
             demoForm.Invoke(statusChangeDelegate, new Object[] { cStatus, status });
         }
 
-        public void UpdateReceived(int ph, int itemPos, IUpdateInfo update)
+        public void UpdateReceived(int ph, int itemPos, ItemUpdate update)
         {
             if (ph != this.phase)
                 return;
@@ -114,23 +122,16 @@ namespace DotNetStockListDemo
             while (!connected) {
                 demoForm.Invoke(statusChangeDelegate, new Object[] { 
                     StocklistConnectionListener.VOID,
-                    "Connecting to Lightstreamer Server @ " + cInfo.PushServerUrl
+                    "Connecting to Lightstreamer Server @ " + client.connectionDetails.ServerAddress
                 });
                 try {
                     if (ph != this.phase)
                         return;
                     ph = Interlocked.Increment(ref this.phase);
-                    client.OpenConnection(this.cInfo, new StocklistConnectionListener(this, ph));
+                    client.addListener(new StocklistConnectionListener(this, ph));
+                    client.connect();
                     connected = true;
-                } catch (PushConnException e) {
-                    demoForm.Invoke(statusChangeDelegate, new Object[] {
-                        StocklistConnectionListener.VOID, e.Message
-                    });
-                } catch (PushServerException e) {
-                    demoForm.Invoke(statusChangeDelegate, new Object[] {
-                        StocklistConnectionListener.VOID, e.Message
-                    });
-                } catch (PushUserException e) {
+                } catch (Exception e) {
                     demoForm.Invoke(statusChangeDelegate, new Object[] {
                         StocklistConnectionListener.VOID, e.Message
                     });
@@ -152,34 +153,18 @@ namespace DotNetStockListDemo
 
             try
             {
-                SimpleTableInfo tableInfo = new SimpleTableInfo(
-                    "item1 item2 item3 item4 item5 item6 item7 item8 item9 item10 item11 item12 item13 item14 item15 item16 item17 item18 item19 item20 item21 item22 item23 item24 item25 item26 item27 item28 item29 item30",
-                    "MERGE",
-                    "stock_name last_price time pct_change bid_quantity bid ask ask_quantity min max ref_price open_price",
-                    true)
-                {
-                    DataAdapter = "QUOTE_ADAPTER"
-                };
+                Subscription sub = new Subscription("MERGE", new string[30] { "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9", "item10", "item11", "item12", "item13", "item14", "item15", "item16", "item17", "item18", "item19", "item20", "item21", "item22", "item23", "item24", "item25", "item26", "item27", "item28", "item29", "item30" },
+                    new string[12]{ "stock_name", "last_price", "time", "pct_change", "bid_quantity", "bid", "ask", "ask_quantity", "min", "max", "ref_price", "open_price"});
+                sub.DataAdapter = "QUOTE_ADAPTER";
+                sub.RequestedSnapshot = "yes";
 
-                client.SubscribeTable(
-                    tableInfo,
-                    new StocklistHandyTableListener(this, this.phase),
-                    false);
-            }
-            catch (SubscrException)
-            {
-            }
-            catch (PushServerException e)
+                sub.addListener(new StocklistSubscriptionListener(this, this.phase));
+                client.subscribe(sub);
+            } catch (Exception e)
             {
                 demoForm.Invoke(statusChangeDelegate, new Object[] {
                         StocklistConnectionListener.VOID, e.Message
                     });
-            }
-            catch (PushUserException)
-            {
-            }
-            catch (PushConnException)
-            {
             }
         }
 

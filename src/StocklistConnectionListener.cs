@@ -17,15 +17,12 @@
 #endregion License
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Lightstreamer.DotNetStandard.Client;
+using com.lightstreamer.client;
 
 namespace DotNetStockListDemo
 {
 
-    class StocklistConnectionListener : IConnectionListener {
+    class StocklistConnectionListener : ClientListener {
         public const int VOID = -1;
         public const int DISCONNECTED = 0;
         public const int POLLING = 1;
@@ -44,37 +41,6 @@ namespace DotNetStockListDemo
             this.phase = phase;
         }
 
-        public void OnConnectionEstablished() {
-            this.slClient.StatusChanged(this.phase,VOID, "Connected to Lightstreamer Server..." );
-        }
-
-        public void OnSessionStarted(bool isPolling) {
-            if (isPolling)
-            {
-                this.slClient.StatusChanged(this.phase, POLLING, "Lightstreamer is pushing (smart polling mode)...");
-            }
-            else
-            {
-                this.slClient.StatusChanged(this.phase, STREAMING, "Lightstreamer is pushing (streaming mode)...");
-            }
-            
-        }
-
-        public void OnNewBytes(long b) {}
-
-        public void OnDataError(PushServerException e) {
-            this.slClient.StatusChanged(this.phase, VOID, "Data error");
-        }
-
-        public void OnActivityWarning(bool warningOn) {
-            if (warningOn) {
-                this.slClient.StatusChanged(this.phase, STALLED, "Connection stalled");
-            }
-            else {
-                this.slClient.StatusChanged(this.phase, STREAMING, "Lightstreamer is pushing (streaming mode)...");
-            }
-        }
-
         private void OnDisconnection(String status) {
             this.slClient.StatusChanged(this.phase, DISCONNECTED, status);
             this.slClient.Start(this.phase);
@@ -88,12 +54,63 @@ namespace DotNetStockListDemo
             this.OnDisconnection("Connection forcibly closed");
 		}
 
-        public void OnFailure(PushServerException e) {
-            this.OnDisconnection("Server failure");
+        void ClientListener.onListenEnd(LightstreamerClient client)
+        {
+            // ...
         }
 
-        public void OnFailure(PushConnException e) {
-            this.OnDisconnection("Connection failure");
+        void ClientListener.onListenStart(LightstreamerClient client)
+        {
+            // ...
+        }
+
+        void ClientListener.onServerError(int errorCode, string errorMessage)
+        {
+            this.OnDisconnection("Server Error " + errorCode + " - " + errorMessage);
+        }
+
+        void ClientListener.onStatusChange(string status)
+        {
+            if ( status.StartsWith("CONNECTED:WS") )
+            {
+                if (status.EndsWith("POLLING"))
+                {
+                    this.slClient.StatusChanged(this.phase, POLLING, "Connected over Webscocket in polling mode");
+                }
+                else if (status.EndsWith("STREAMING"))
+                {
+                    this.slClient.StatusChanged(this.phase, STREAMING, "Connected over Websocket in streaming mode");
+                }
+            }
+            else if ( status.StartsWith("CONNECTED:HT") )
+            {
+                if (status.EndsWith("POLLING"))
+                {
+                    this.slClient.StatusChanged(this.phase, POLLING, "Connected over HTTP in polling mode");
+                }
+                else if (status.EndsWith("STREAMING"))
+                {
+                    this.slClient.StatusChanged(this.phase, STREAMING, "Connected over HTTP in streaming mode");
+                }
+            }
+            else if (status.StartsWith("CONNECTING"))
+            {
+                this.slClient.StatusChanged(this.phase, VOID, "Connecting to Lightstreamer Server...");
+            }
+            else if (status.StartsWith("DISCONNECTED"))
+            {
+                this.slClient.StatusChanged(this.phase, DISCONNECTED, status);
+                this.slClient.Start(this.phase);
+            }
+            else if (status.StartsWith("STALLED"))
+            {
+                this.slClient.StatusChanged(this.phase, STALLED, "Connection stalled");
+            }
+        }
+
+        void ClientListener.onPropertyChange(string property)
+        {
+            // ...
         }
     }
 

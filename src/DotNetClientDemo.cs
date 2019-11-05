@@ -29,18 +29,24 @@ namespace DotNetStockListDemo
         [STAThread]
         static void Main(string[] args) {
             string pushServerHost = "localhost";
-            int pushServerPort = 80;
+            int pushServerPort = 8080;
+            string forceTransport = "no";
+
             if (args.Length >= 1) {
                 pushServerHost = args[0];
             }
             if (args.Length >= 2) {
                 pushServerPort = Int32.Parse(args[1]);
             }
+            if (args.Length >= 3)
+            {
+                forceTransport = args[2];
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DemoForm form = new DemoForm(pushServerHost, pushServerPort);
+            DemoForm form = new DemoForm(pushServerHost, pushServerPort, forceTransport);
             Application.AddMessageFilter(form);
             Application.Run(form);
         }

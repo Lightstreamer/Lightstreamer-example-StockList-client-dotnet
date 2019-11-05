@@ -1,5 +1,5 @@
 ﻿
-using Lightstreamer.DotNetStandard.Client.Log;
+using Lightstreamer.DotNet.Logging.Log;
 using System.Collections.Generic;
 
 namespace Lightstreamer.DotNet.Client.Test

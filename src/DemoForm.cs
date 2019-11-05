@@ -27,14 +27,15 @@ using System.Threading;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-using Lightstreamer.DotNetStandard.Client;
+using com.lightstreamer.client;
 
 using DotNetStockListDemo.Properties;
+using System.Collections.Generic;
 
 namespace DotNetStockListDemo
 {
 
-    public delegate void LightstreamerUpdateDelegate(int item, IUpdateInfo values);
+    public delegate void LightstreamerUpdateDelegate(int item, ItemUpdate values);
     public delegate void LightstreamerStatusChangedDelegate(int cStatus, string status);
 
     public delegate void StopDelegate();
@@ -42,7 +43,7 @@ namespace DotNetStockListDemo
 
     public partial class DemoForm : Form, IMessageFilter {
         private static readonly Color blinkOnColor = Color.Yellow;
-        private static readonly Color blinkOffColor = Color.White;
+        private static readonly Color blinkOffColor = Color.LightGoldenrodYellow;
         private const long blinkTime = 300; // millisecs
 
         private StocklistClient stocklistClient;
@@ -52,6 +53,7 @@ namespace DotNetStockListDemo
         private bool isDirty = false;
 
         private string pushServerUrl;
+        private string forceT;
 #region API Declarations
 
         [DllImport("user32.dll")]
@@ -71,18 +73,32 @@ namespace DotNetStockListDemo
 
 #endregion // API Declarations
 
-        public DemoForm(string pushServerHost, int pushServerPort ) {
+        public DemoForm(string pushServerHost, int pushServerPort, string forceTransport ) {
             stocklistClient = null;
             blinkingCells = new ArrayList();
-            blinkEnabled = false;
+            blinkEnabled = true;
             blinkMenu = false;
 
-            pushServerUrl = "http://" + pushServerHost + ":" + pushServerPort;
+            if (pushServerHost.StartsWith("http") || pushServerHost.StartsWith("HTTP"))
+            {
+                pushServerUrl = pushServerHost;
+            }
+            else
+            {
+                pushServerUrl = "http://" + pushServerHost + ":" + pushServerPort;
+            }
+
+            forceT = forceTransport;
 
             Thread t = new Thread(new ThreadStart(DeblinkingThread));
             t.Start();
 
             InitializeComponent();
+        }
+
+        private static bool IsOdd(int value)
+        {
+            return value % 2 != 0;
         }
 
         private void OnFormLoaded(object sender, EventArgs e) {
@@ -91,6 +107,26 @@ namespace DotNetStockListDemo
             }
 
             dataGridview.Refresh();
+
+            dataGridview.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
+            dataGridview.ColumnHeadersDefaultCellStyle.ForeColor = Color.AntiqueWhite;
+            dataGridview.EnableHeadersVisualStyles = false;
+
+            dataGridview.DefaultCellStyle.Font = new Font("Gadugi", 12, GraphicsUnit.Point);
+            dataGridview.DefaultCellStyle.BackColor = Color.Aquamarine;
+
+            for (int i = 0; i < 30; i++)
+            {
+
+                if (IsOdd(i))
+                {
+                    dataGridview.Rows[i].DefaultCellStyle.ForeColor = Color.DarkSlateBlue;
+                }
+                else
+                {
+                    dataGridview.Rows[i].DefaultCellStyle.ForeColor = Color.DarkGoldenrod;
+                }
+            }
 
             Thread t = new Thread(new ThreadStart(StartLightstreamer));
             t.Start();
@@ -110,8 +146,12 @@ namespace DotNetStockListDemo
         }
 
         private void StartLightstreamer() {
+
+
+
             stocklistClient = new StocklistClient(
                 pushServerUrl,
+                forceT,
                 this,
                 new LightstreamerUpdateDelegate(OnLightstreamerUpdate),
                 new LightstreamerStatusChangedDelegate(OnLightstreamerStatusChanged));
@@ -120,7 +160,7 @@ namespace DotNetStockListDemo
             stocklistClient.Start();
         }
 
-        private void OnLightstreamerUpdate(int item, IUpdateInfo values)
+        private void OnLightstreamerUpdate(int item, ItemUpdate values)
         {
             dataGridview.SuspendLayout();
 
@@ -133,50 +173,51 @@ namespace DotNetStockListDemo
             DataGridViewRow row = dataGridview.Rows[item - 1];
 
             ArrayList cells = new ArrayList();
-            int len = values.NumFields;
-            for (int i = 0; i < len; i++) {
-                if (values.IsValueChanged(i + 1)) {
-                    string val = values.GetNewValue(i + 1);
-                    DataGridViewCell cell = row.Cells[i];
+            foreach (KeyValuePair<int, string> entry in values.ChangedFieldsByPosition)
+            {
+                
+                DataGridViewCell cell = row.Cells[entry.Key - 1];
+                
+                switch (entry.Key - 1) {
+                    case 1: // last_price          
+                    case 5: // bid
+                    case 6: // ask
+                    case 8: // min
+                    case 9: // max
+                    case 11: // ref_price
+                    case 10: // open_price
+                        double dVal = Double.Parse(entry.Value, CultureInfo.GetCultureInfo("en-US").NumberFormat);
+                        cell.Value = dVal;
+                        break;
 
-                    switch (i) {
-                        case 1: // last_price          
-                        case 5: // bid
-                        case 6: // ask
-                        case 8: // min
-                        case 9: // max
-                        case 10: // ref_price
-                        case 11: // open_price
-                            double dVal = Double.Parse(val, CultureInfo.GetCultureInfo("en-US").NumberFormat);
-                            cell.Value = dVal;
-                            break;
+                    case 3: // pct_change
+                        double dVal2 = Double.Parse(entry.Value, CultureInfo.GetCultureInfo("en-US").NumberFormat);
+                        cell.Value = dVal2;
+                        cell.Style.ForeColor = ((dVal2 < 0.0) ? Color.Red : Color.Green);
+                        break;
 
-                        case 3: // pct_change
-                            double dVal2 = Double.Parse(val, CultureInfo.GetCultureInfo("en-US").NumberFormat);
-                            cell.Value = dVal2;
-                            cell.Style.ForeColor = ((dVal2 < 0.0) ? Color.Red : Color.Green);
-                            break;
+                    case 4: // bid_quantity
+                    case 7: // ask_quantity
+                        int lVal = Int32.Parse(entry.Value);
+                        cell.Value = lVal;
+                        break;
 
-                        case 4: // bid_quantity
-                        case 7: // ask_quantity
-                            int lVal = Int32.Parse(val);
-                            cell.Value = lVal;
-                            break;
+                    case 2: // time
+                        DateTime dtVal = DateTime.Parse(entry.Value);
+                        cell.Value = dtVal;
+                        break;
 
-                        case 2: // time
-                            DateTime dtVal = DateTime.Parse(val);
-                            cell.Value = dtVal;
-                            break;
+                    default: // stock_name, ...
+                        cell.Value = entry.Value;
+                        break;
+                }
+                
+                // cell.Value = entry.Value;
 
-                        default: // stock_name, ...
-                            cell.Value = val;
-                            break;
-                    }
-
-                    if (blinkEnabled) {
-                        cell.Style.BackColor = blinkOnColor;
-                        cells.Add(cell);
-                    }
+                if (blinkEnabled)
+                {
+                    cell.Style.BackColor = blinkOnColor;
+                    cells.Add(cell);
                 }
             }
 
@@ -195,17 +236,27 @@ namespace DotNetStockListDemo
             switch (cStatus)
             {
                 case StocklistConnectionListener.STREAMING:
-                    statusImg.Image = Resources.status_connected_streaming;
+                    lblStatus.BackColor = Color.LightGreen;
+                    if (status.Contains("HTTP"))
+                    {
+                        lblStatus.Text = "HTTP";
+                    } else
+                    {
+                        lblStatus.Text = "WS";
+                    }
+                    
                     break;
                 case StocklistConnectionListener.POLLING:
-                    statusImg.Image = Resources.status_connected_polling;
+                    lblStatus.BackColor = Color.GreenYellow;
+                    lblStatus.Text = "Poll";
                     break;
                 case StocklistConnectionListener.STALLED:
-                    statusImg.Image = Resources.status_stalled;
+                    lblStatus.BackColor = Color.LightSalmon;
+                    lblStatus.Text = "...";
                     break;
                 case StocklistConnectionListener.DISCONNECTED:
-                    this.isDirty = true;
-                    statusImg.Image = Resources.status_disconnected;
+                    lblStatus.BackColor = Color.OrangeRed;
+                    lblStatus.Text = "--";
                     break;
                 default:
                     break;
@@ -331,7 +382,8 @@ namespace DotNetStockListDemo
                     break;
             }
 
-            base.WndProc(ref messg);
+                base.WndProc(ref messg);
+            
         }
 
 #endregion // System Menu API

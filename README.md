@@ -2,7 +2,7 @@
 
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
-This project contains a full example of a .NET Framework client application that employs the [.NET Standard client API for Lightstreamer](https://www.lightstreamer.com/api/ls-dotnetstandard-client/latest/).
+This project contains a full example of a .NET Framework client application that employs the [.NET Standard client API for Lightstreamer](https://lightstreamer.com/temp/temp_dotnet_unified_docs/).
 
 ## Live Demo
 
@@ -16,16 +16,19 @@ This is a .NET desktop version of the [Lightstreamer- Basic Stock-List Demo - HT
 
 This app uses the <b>.NET Standard Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
+<br>
+This application uses the LightstreamerClient class to connect to Lightstreamer Server and subscribe to the 30 items. The client library offers auto-reconnection and auto-resubscription logic out of the box. The status of the connection can be seen on the top right corener or in the bottom statys bar of the demo. 
+A *DataGridview* object from System.Windows.Forms is used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism, too.
 <!-- END DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
 ## Install 
 
 If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
 
-* Note that, as prerequisite, the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
+* Note that, as prerequisite, a windows system is required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
 * Launch Lightstreamer Server.
-* Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract the application installer (a ".msi" file).
-* Execute the downloaded file `DotNetClientDemo_Local_N2.msi` to install the application.
+* Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract the application installer (look for a `setup.exe` file).
+* Execute the downloaded file `setup.exe` to install the application.
 * From the Start menu, go to the "Lightstreamer .NET Stock-List Demo" folder, and click the "DotNetStockListDemo.exe" link.
 
 ## Build
@@ -36,44 +39,13 @@ To build your own version of the `DotNetStockListDemo.exe` executable, instead o
 * `Properties/*`
 * `Images/*`
 
-To recompile the provided sources, you just need to create a project for a <b>Windows Application target</b>, then include the sources and include reference to the .NET Standard Client library.
-You can download binaries files of the library (`Lightstreamer_DotNet_Standard_Client.dll` and `Lightstreamer_DotNet_Standard_Client.pdb`) from NuGet [Lightstreamer.DotNetStandard.Client](https://www.nuget.org/packages/Lightstreamer.DotNet.Client/) or use directly the Package Manager Console:
-	`Install-Package Lightstreamer.DotNetStandard.Client`
- 
-
-### Deploy
-
-Once you have generated the Demo Client binaries (`DotNetClientDemo_N2.exe`), you should create a deploy folder, let's call it `Deployment`, and copy the binaries here. Then, get the .NET Standard Client API for Lightstreamer binaries files (see above) and put them in the `Deployment` folder.
-Now you can prepare a `DotNetClient.bat` launch script such as this:
-```cmd
-@echo off
-
-rem ---------------------------------------------------------------------------
-rem Set the DotNet installation path as the current directory. Change the 
-rem directory accordingly to your installation path of DotNet Adapter.
-
-pushd .
-
-
-rem ---------------------------------------------------------------------------
-rem Start the StockList Demo Client, specifiyng to connect to the local
-rem Lightstreamer Server instance.
-
-start "DotNetStockListDemo" DotNetStockListDemo localhost 8080
-
-
-rem ---------------------------------------------------------------------------
-rem All done. Goes back to the original current directory and pauses, in case 
-rem of any error.
-
-echo Processes started. All done.
-popd
-pause
-```
-
-The `DotNetClientDemo_N2` executable can also be run by double-clicking it; in its default configuration, the client will try to connect to Lightstreamer server at http://localhost:80.
-In this case, the [QUOTE_ADAPTER](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed in your local Lightstreamer server instance;
-the [LiteralBasedProvider](https://github.com/Lightstreamer/Lightstreamer-example-ReusableMetadata-adapter-java) is also needed, but it is already provided by Lightstreamer server.<br>
+To recompile the provided sources, you just need to create a project for a <b>Windows Application target</b>, then include the sources listed above.
+You should complete this project with the [Lightstreamer .NET Standard Client library](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client/5.0.0-beta), to be used for the build process, trough NuGet. Follow these steps:
+	* In the "Solution Explorer" tab, right click on the project and choose `Manage NuGet Packages ...`
+	* In the Search text box enter `Lightstreamer` and be sure to flag the *Include preliminary version* check-box
+	* Choose the Lightstreamer.DotNetStandard.Client last version then click `Install` and then `Ok`
+	* Check out that among the References of your project Lightstreamer_DotNet_Standard_Client was added.
+Repeat the above steps also for "log4net".
 
 ## See Also
 
@@ -89,12 +61,11 @@ the [LiteralBasedProvider](https://github.com/Lightstreamer/Lightstreamer-exampl
 
 * [Lightstreamer - Stock-List Demos - HTML Clients](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-client-javascript)
 * [Lightstreamer - Basic Stock-List Demo - jQuery (jqGrid) Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-jquery)
-* [Lightstreamer - Stock-List Demo - Dojo Toolkit Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dojo)
 * [Lightstreamer - Basic Stock-List Demo - Java SE (Swing) Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-java)
-* [Lightstreamer - Portfolio Demo - Flex Client](https://github.com/Lightstreamer/Lightstreamer-example-Portfolio-client-flex)
+* [Lightstreamer - Quickstart Example - .NET Client](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet)
 
 ## Lightstreamer Compatibility Notes
 
-* Compatible with Lightstreamer .NET Standard Client Library version 4.0.0 or newer.
+* Compatible with Lightstreamer .NET Standard Client Library version 5.0.0 or newer.
 * Ensure that .NET Standard Client API is supported by Lightstreamer Server license configuration.
-
+* - For instructions compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/tree/deploy2)
