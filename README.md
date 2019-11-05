@@ -45,8 +45,7 @@ You should complete this project with the [Lightstreamer .NET Standard Client li
   - In the Search text box enter `Lightstreamer` and be sure to flag the *Include preliminary version* check-box
   - Choose the Lightstreamer.DotNetStandard.Client last version then click `Install` and then `Ok`
   - Check out that among the References of your project Lightstreamer_DotNet_Standard_Client was added.
-<br>
-Repeat the above steps also for "log4net" reference.
+  - Repeat the above steps also for `log4net` reference.
 
 ## See Also
 
