@@ -6,9 +6,9 @@ This project contains a full example of a .NET Framework client application that
 
 ## Live Demo
 
-[![screenshot](screen_dotnet_large.png)](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
-### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/DotNetDemo/DotNetClientDemo_N2.msi)<br>
-(download DotNetClientDemo_N2.msi; launch it; follow the instructions)
+[![screenshot](screen_dotnet_large.png)](http://demos.lightstreamer.com/DotNetDemo/deploy_push.zip)<br>
+### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](http://demos.lightstreamer.com/DotNetDemo/deploy_push.zip)<br>
+(download deploy_push.zip; unzip it; launch setup.exe; follow the instructions)
 
 ## Details
 
@@ -45,7 +45,7 @@ You should complete this project with the [Lightstreamer .NET Standard Client li
 	* In the Search text box enter `Lightstreamer` and be sure to flag the *Include preliminary version* check-box
 	* Choose the Lightstreamer.DotNetStandard.Client last version then click `Install` and then `Ok`
 	* Check out that among the References of your project Lightstreamer_DotNet_Standard_Client was added.
-Repeat the above steps also for "log4net".
+Repeat the above steps also for "log4net" reference.
 
 ## See Also
 
