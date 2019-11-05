@@ -25,7 +25,7 @@ A *DataGridview* object from System.Windows.Forms is used to display the real-ti
 
 If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
 
-* Note that, as prerequisite, a windows system is required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
+* Note that, as prerequisite, a windows system is required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out the project and follow the installation instructions provided with it.
 * Launch Lightstreamer Server.
 * Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract the application installer (look for a `setup.exe` file).
 * Execute the downloaded file `setup.exe` to install the application.
@@ -41,10 +41,10 @@ To build your own version of the `DotNetStockListDemo.exe` executable, instead o
 
 To recompile the provided sources, you just need to create a project for a <b>Windows Application target</b>, then include the sources listed above.
 You should complete this project with the [Lightstreamer .NET Standard Client library](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client/5.0.0-beta), to be used for the build process, trough NuGet. Follow these steps:
-	* In the "Solution Explorer" tab, right click on the project and choose `Manage NuGet Packages ...`
-	* In the Search text box enter `Lightstreamer` and be sure to flag the *Include preliminary version* check-box
-	* Choose the Lightstreamer.DotNetStandard.Client last version then click `Install` and then `Ok`
-	* Check out that among the References of your project Lightstreamer_DotNet_Standard_Client was added.
+  - In the "Solution Explorer" tab, right click on the project and choose `Manage NuGet Packages ...`
+  - In the Search text box enter `Lightstreamer` and be sure to flag the *Include preliminary version* check-box
+  - Choose the Lightstreamer.DotNetStandard.Client last version then click `Install` and then `Ok`
+  - Check out that among the References of your project Lightstreamer_DotNet_Standard_Client was added.
 Repeat the above steps also for "log4net" reference.
 
 ## See Also
@@ -68,4 +68,4 @@ Repeat the above steps also for "log4net" reference.
 
 * Compatible with Lightstreamer .NET Standard Client Library version 5.0.0 or newer.
 * Ensure that .NET Standard Client API is supported by Lightstreamer Server license configuration.
-* - For instructions compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/tree/deploy2)
+* For instructions compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/tree/deploy2)
