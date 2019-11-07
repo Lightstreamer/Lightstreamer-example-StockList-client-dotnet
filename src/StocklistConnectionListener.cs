@@ -99,8 +99,7 @@ namespace DotNetStockListDemo
             }
             else if (status.StartsWith("DISCONNECTED"))
             {
-                this.slClient.StatusChanged(this.phase, DISCONNECTED, status);
-                this.slClient.Start(this.phase);
+                this.slClient.StatusChanged(this.phase, DISCONNECTED, "Disconnected");
             }
             else if (status.StartsWith("STALLED"))
             {

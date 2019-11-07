@@ -113,7 +113,10 @@ namespace DotNetStockListDemo
             dataGridview.EnableHeadersVisualStyles = false;
 
             dataGridview.DefaultCellStyle.Font = new Font("Gadugi", 12, GraphicsUnit.Point);
-            dataGridview.DefaultCellStyle.BackColor = Color.Aquamarine;
+            dataGridview.DefaultCellStyle.BackColor = Color.AntiqueWhite;
+            comboBox1.Text = "Forced Transport to ...";
+            comboBox1.BackColor = Color.AntiqueWhite;
+            comboBox1.ForeColor = Color.DarkGoldenrod;
 
             for (int i = 0; i < 30; i++)
             {
@@ -386,8 +389,23 @@ namespace DotNetStockListDemo
             
         }
 
-#endregion // System Menu API
+        #endregion // System Menu API
 
+        private void btnResetConn_Click(object sender, EventArgs e)
+        {
+            stocklistClient.Reset();
+            trackBar1.Value = 0;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            stocklistClient.ForceTransport(comboBox1.SelectedItem.ToString());
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            stocklistClient.MaxFrequency(trackBar1.Value);
+        }
     }
 
 }

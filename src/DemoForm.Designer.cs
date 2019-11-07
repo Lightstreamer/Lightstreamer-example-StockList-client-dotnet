@@ -69,9 +69,15 @@ namespace DotNetStockListDemo {
             this.title = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnResetConn = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.lblHigh = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -135,7 +141,7 @@ namespace DotNetStockListDemo {
             dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridview.DefaultCellStyle = dataGridViewCellStyle44;
             this.dataGridview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridview.Location = new System.Drawing.Point(0, 90);
+            this.dataGridview.Location = new System.Drawing.Point(0, 157);
             this.dataGridview.Name = "dataGridview";
             this.dataGridview.ReadOnly = true;
             this.dataGridview.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -148,7 +154,7 @@ namespace DotNetStockListDemo {
             dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridview.RowHeadersDefaultCellStyle = dataGridViewCellStyle45;
             this.dataGridview.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridview.Size = new System.Drawing.Size(1044, 535);
+            this.dataGridview.Size = new System.Drawing.Size(1044, 468);
             this.dataGridview.TabIndex = 3;
             // 
             // StockName
@@ -292,7 +298,7 @@ namespace DotNetStockListDemo {
             // logoImg
             // 
             this.logoImg.Image = ((System.Drawing.Image)(resources.GetObject("logoImg.Image")));
-            this.logoImg.Location = new System.Drawing.Point(49, 12);
+            this.logoImg.Location = new System.Drawing.Point(77, 34);
             this.logoImg.Name = "logoImg";
             this.logoImg.Size = new System.Drawing.Size(230, 58);
             this.logoImg.TabIndex = 4;
@@ -303,7 +309,7 @@ namespace DotNetStockListDemo {
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Gadugi", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.ForeColor = System.Drawing.Color.AntiqueWhite;
-            this.title.Location = new System.Drawing.Point(554, 37);
+            this.title.Location = new System.Drawing.Point(520, 15);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(359, 25);
             this.title.TabIndex = 6;
@@ -325,11 +331,85 @@ namespace DotNetStockListDemo {
             this.lblStatus.CausesValidation = false;
             this.lblStatus.Font = new System.Drawing.Font("Gadugi", 15.75F, System.Drawing.FontStyle.Bold);
             this.lblStatus.ForeColor = System.Drawing.Color.AntiqueWhite;
-            this.lblStatus.Location = new System.Drawing.Point(933, 37);
+            this.lblStatus.Location = new System.Drawing.Point(906, 15);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(71, 25);
             this.lblStatus.TabIndex = 8;
             this.lblStatus.Text = "label2";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "no - (Stream-Sense Enabled)",
+            "WS",
+            "HTTP",
+            "WS-STREAMING",
+            "HTTP-STREAMING",
+            "WS-POLLING",
+            "HTTP-POLLING"});
+            this.comboBox1.Location = new System.Drawing.Point(516, 56);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(298, 27);
+            this.comboBox1.TabIndex = 9;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // btnResetConn
+            // 
+            this.btnResetConn.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnResetConn.FlatAppearance.BorderSize = 0;
+            this.btnResetConn.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnResetConn.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnResetConn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetConn.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetConn.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.btnResetConn.Location = new System.Drawing.Point(837, 57);
+            this.btnResetConn.Name = "btnResetConn";
+            this.btnResetConn.Size = new System.Drawing.Size(151, 26);
+            this.btnResetConn.TabIndex = 10;
+            this.btnResetConn.Text = "Reset Connection";
+            this.btnResetConn.UseCompatibleTextRendering = true;
+            this.btnResetConn.UseVisualStyleBackColor = false;
+            this.btnResetConn.Click += new System.EventHandler(this.btnResetConn_Click);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.trackBar1.Location = new System.Drawing.Point(551, 93);
+            this.trackBar1.Maximum = 9;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(274, 45);
+            this.trackBar1.TabIndex = 11;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // lblHigh
+            // 
+            this.lblHigh.AutoSize = true;
+            this.lblHigh.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHigh.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.lblHigh.Location = new System.Drawing.Point(512, 105);
+            this.lblHigh.Name = "lblHigh";
+            this.lblHigh.Size = new System.Drawing.Size(42, 19);
+            this.lblHigh.TabIndex = 12;
+            this.lblHigh.Text = "High";
+            this.lblHigh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Gadugi", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.label2.Location = new System.Drawing.Point(822, 105);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(166, 19);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "low updates frequency";
             // 
             // DemoForm
             // 
@@ -337,6 +417,11 @@ namespace DotNetStockListDemo {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DodgerBlue;
             this.ClientSize = new System.Drawing.Size(1044, 650);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblHigh);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.btnResetConn);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.title);
@@ -353,6 +438,7 @@ namespace DotNetStockListDemo {
             this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,5 +465,10 @@ namespace DotNetStockListDemo {
         private System.Windows.Forms.DataGridViewTextBoxColumn OpenPrice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnResetConn;
+        protected System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label lblHigh;
+        private System.Windows.Forms.Label label2;
     }
 }

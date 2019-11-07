@@ -32,7 +32,9 @@ namespace DotNetStockListDemo
         private LightstreamerStatusChangedDelegate statusChangeDelegate;
 
         private LightstreamerClient client;
-        
+        private Subscription subscription;
+
+
         public StocklistClient(
                 string pushServerUrl,
                 string forceT,
@@ -72,6 +74,8 @@ namespace DotNetStockListDemo
 
         private int phase = 0;
 
+        private int reset = 0;
+
         public void Start(int ph)
         {
             if (ph != this.phase)
@@ -92,6 +96,14 @@ namespace DotNetStockListDemo
             t.Start();
         }
 
+        public void Reset()
+        {
+            if ( Interlocked.CompareExchange(ref this.reset, 1, 0) == 0 )
+            {
+                Disconnect(this.phase);
+            }
+        }
+
         private void Execute(int ph) {
             if (ph != this.phase)
             {
@@ -104,9 +116,24 @@ namespace DotNetStockListDemo
 
         public void StatusChanged(int ph, int cStatus, string status)
         {
-            if (ph != this.phase)
+            /* if (ph != this.phase)
                 return;
+                */
             demoForm.Invoke(statusChangeDelegate, new Object[] { cStatus, status });
+            if ( cStatus == 0 )
+            {
+                if ( Interlocked.CompareExchange(ref this.reset, 0, 1) == 1 )
+                {
+                    Thread.Sleep(2500);
+
+                    int phs = Interlocked.Increment(ref this.phase);
+                    Thread t = new Thread(new ThreadStart(delegate ()
+                    {
+                        Execute(phs);
+                    }));
+                    t.Start();
+                }
+            }
         }
 
         public void UpdateReceived(int ph, int itemPos, ItemUpdate update)
@@ -143,6 +170,24 @@ namespace DotNetStockListDemo
                 }
         }
 
+        private void Disconnect(int ph)
+        {
+            demoForm.Invoke(statusChangeDelegate, new Object[] {
+                    StocklistConnectionListener.VOID,
+                    "Disconnecting to Lightstreamer Server @ " + client.connectionDetails.ServerAddress
+                });
+            try
+            {                
+                client.disconnect();
+            }
+            catch (Exception e)
+            {
+                demoForm.Invoke(statusChangeDelegate, new Object[] {
+                        StocklistConnectionListener.VOID, e.Message
+                    });
+            }
+        }
+
         private void Subscribe() {
             //this method will try just one subscription.
             //we know that when this method executes we should be already connected
@@ -153,13 +198,13 @@ namespace DotNetStockListDemo
 
             try
             {
-                Subscription sub = new Subscription("MERGE", new string[30] { "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9", "item10", "item11", "item12", "item13", "item14", "item15", "item16", "item17", "item18", "item19", "item20", "item21", "item22", "item23", "item24", "item25", "item26", "item27", "item28", "item29", "item30" },
+                subscription = new Subscription("MERGE", new string[30] { "item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9", "item10", "item11", "item12", "item13", "item14", "item15", "item16", "item17", "item18", "item19", "item20", "item21", "item22", "item23", "item24", "item25", "item26", "item27", "item28", "item29", "item30" },
                     new string[12]{ "stock_name", "last_price", "time", "pct_change", "bid_quantity", "bid", "ask", "ask_quantity", "min", "max", "ref_price", "open_price"});
-                sub.DataAdapter = "QUOTE_ADAPTER";
-                sub.RequestedSnapshot = "yes";
+                subscription.DataAdapter = "QUOTE_ADAPTER";
+                subscription.RequestedSnapshot = "yes";
 
-                sub.addListener(new StocklistSubscriptionListener(this, this.phase));
-                client.subscribe(sub);
+                subscription.addListener(new StocklistSubscriptionListener(this, this.phase));
+                client.subscribe(subscription);
             } catch (Exception e)
             {
                 demoForm.Invoke(statusChangeDelegate, new Object[] {
@@ -168,5 +213,58 @@ namespace DotNetStockListDemo
             }
         }
 
+        internal void ForceTransport(string selectedText)
+        {
+            if (selectedText.StartsWith("no"))
+            {
+                client.connectionOptions.ForcedTransport = null;
+            } else
+            {
+                client.connectionOptions.ForcedTransport = selectedText;
+            }
+            
+        }
+
+        internal void MaxFrequency(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    subscription.RequestedMaxFrequency = "unlimited";
+                    break;
+                case 1:
+                    subscription.RequestedMaxFrequency = "5";
+                    break;
+                case 2:
+                    subscription.RequestedMaxFrequency = "2";
+                    break;
+                case 3:
+                    subscription.RequestedMaxFrequency = "1";
+                    break;
+                case 4:
+                    subscription.RequestedMaxFrequency = "0.5";
+                    break;
+                case 5:
+                    subscription.RequestedMaxFrequency = "0.3";
+                    break;
+                case 6:
+                    subscription.RequestedMaxFrequency = "0.2";
+                    break;
+                case 7:
+                    subscription.RequestedMaxFrequency = "0.1";
+                    break;
+                case 8:
+                    subscription.RequestedMaxFrequency = "0.05";
+                    break;
+                case 9:
+                    subscription.RequestedMaxFrequency = "0.01";
+                    break;
+                default:
+                    subscription.RequestedMaxFrequency = "0.01";
+                    break;
+            }
+            
+            // client.subscribe(subscription);
+        }
     }
 }

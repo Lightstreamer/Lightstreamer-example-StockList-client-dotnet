@@ -28,8 +28,8 @@ namespace DotNetStockListDemo
 
         [STAThread]
         static void Main(string[] args) {
-            string pushServerHost = "localhost";
-            int pushServerPort = 8080;
+            string pushServerHost = "https://push.lightstreamer.com";
+            int pushServerPort = 0;
             string forceTransport = "no";
 
             if (args.Length >= 1) {
