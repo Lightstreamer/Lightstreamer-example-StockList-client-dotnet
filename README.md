@@ -25,6 +25,9 @@ At the top right of the form there are few controls that allow you to:
  * reset the connection with the Lightstreamer server  to force a new client session;
  * dynamically  change the max updates frequency allowed for the subscription, varying from unlimited to 1 update every 100 seconds.
 
+Double-clicking on the last column a new Form will be shown with a *Chart* object from System.Windows.Forms drawing a real-time serie for the quotes of the related stock.
+Each new Chart form involves a new Subscription in order to be totally released from any limitation on the frequency of updates imposed on the main subscription of the grid. 
+
 <!-- END DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
 ## Install 
@@ -74,5 +77,5 @@ You should complete this project with the [Lightstreamer .NET Standard Client li
 ## Lightstreamer Compatibility Notes
 
 * Compatible with Lightstreamer .NET Standard Client Library version 5.0.0 or newer.
-* Ensure that .NET Standard Client API is supported by Lightstreamer Server license configuration.
+* Ensure that .NET Standard Client API is supported by your Lightstreamer Server license configuration.
 * For instructions compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/tree/deploy2)

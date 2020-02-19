@@ -21,11 +21,12 @@ using System;
 using System.Threading;
 using Lightstreamer.DotNet.Client.Test;
 using com.lightstreamer.client;
+using System.Collections.Generic;
 
 namespace DotNetStockListDemo
 {
     
-    class StocklistClient
+    public class StocklistClient
     {
         private DemoForm demoForm;
         private LightstreamerUpdateDelegate updateDelegate;
@@ -33,7 +34,7 @@ namespace DotNetStockListDemo
 
         private LightstreamerClient client;
         private Subscription subscription;
-
+        private Dictionary<ChartQuotes, Subscription> charts = new Dictionary<ChartQuotes, Subscription>();
 
         public StocklistClient(
                 string pushServerUrl,
@@ -142,7 +143,53 @@ namespace DotNetStockListDemo
                 return;
             demoForm.BeginInvoke(updateDelegate, new Object[] { itemPos, update });
         }
-    
+
+        public void subscribeChart(string item, ChartQuotes receiver)
+        {
+            try
+            {
+                if (charts.ContainsKey(receiver)) return; 
+
+                // We subscribes it again because we don't want any
+                // restriction to updates frequecy of the main subscription.
+
+                Subscription s_stocks = new Subscription("MERGE");
+
+                s_stocks.Fields = new string[3] { "last_price", "time", "stock_name" };
+                s_stocks.Items = new string[1] { item };
+
+                s_stocks.DataAdapter = "QUOTE_ADAPTER";
+                s_stocks.RequestedSnapshot = "yes";
+                s_stocks.RequestedMaxFrequency = "3.0";
+
+                s_stocks.addListener(new ChartListener(">> ", receiver));
+
+                charts.Add(receiver, s_stocks);
+
+                client.subscribe(s_stocks);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception while subscribing: " + ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public void stopSubscribeChart(ChartQuotes receiver)
+        {
+            try
+            {
+                Subscription s_stocks = charts[receiver];
+                
+                client.unsubscribe(s_stocks);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception while subscribing: " + ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
         private void Connect(int ph) {
             bool connected = false;
             //this method will not exit until the openConnection returns without throwing an exception

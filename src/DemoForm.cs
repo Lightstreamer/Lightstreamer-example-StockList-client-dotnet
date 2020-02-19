@@ -18,18 +18,12 @@
 
 using System;
 using System.Collections;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Globalization;
 using System.Runtime.InteropServices;
-
 using com.lightstreamer.client;
-
-using DotNetStockListDemo.Properties;
 using System.Collections.Generic;
 
 namespace DotNetStockListDemo
@@ -41,7 +35,8 @@ namespace DotNetStockListDemo
     public delegate void StopDelegate();
     public delegate void BlinkOffDelegate(DataGridViewCell[] cells);
 
-    public partial class DemoForm : Form, IMessageFilter {
+    public partial class DemoForm : Form, IMessageFilter
+    {
         private static readonly Color blinkOnColor = Color.Yellow;
         private static readonly Color blinkOffColor = Color.LightGoldenrodYellow;
         private const long blinkTime = 300; // millisecs
@@ -54,7 +49,7 @@ namespace DotNetStockListDemo
 
         private string pushServerUrl;
         private string forceT;
-#region API Declarations
+        #region API Declarations
 
         [DllImport("user32.dll")]
         private static extern int GetSystemMenu(int hwnd, bool bRevert);
@@ -71,9 +66,10 @@ namespace DotNetStockListDemo
         private const int WM_SYSCOMMAND = 274;
         private const int WM_KEYDOWN = 256;
 
-#endregion // API Declarations
+        #endregion // API Declarations
 
-        public DemoForm(string pushServerHost, int pushServerPort, string forceTransport ) {
+        public DemoForm(string pushServerHost, int pushServerPort, string forceTransport)
+        {
             stocklistClient = null;
             blinkingCells = new ArrayList();
             blinkEnabled = true;
@@ -101,8 +97,10 @@ namespace DotNetStockListDemo
             return value % 2 != 0;
         }
 
-        private void OnFormLoaded(object sender, EventArgs e) {
-            for (int i = 0; i < 30; i++) {
+        private void OnFormLoaded(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 30; i++)
+            {
                 dataGridview.Rows.Add();
             }
 
@@ -135,11 +133,13 @@ namespace DotNetStockListDemo
             t.Start();
         }
 
-        private void OnFormClosed(object sender, FormClosedEventArgs e) {
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        {
             Environment.Exit(0);
         }
-        
-        private void AddBlinkMenu() {
+
+        private void AddBlinkMenu()
+        {
             if (blinkMenu) return;
             blinkMenu = true;
 
@@ -148,7 +148,8 @@ namespace DotNetStockListDemo
             AppendSysMenu(sysMenuHandle, 54321, "Toggle cell blink effect");
         }
 
-        private void StartLightstreamer() {
+        private void StartLightstreamer()
+        {
 
 
 
@@ -159,7 +160,7 @@ namespace DotNetStockListDemo
                 new LightstreamerUpdateDelegate(OnLightstreamerUpdate),
                 new LightstreamerStatusChangedDelegate(OnLightstreamerStatusChanged));
 
-           
+
             stocklistClient.Start();
         }
 
@@ -178,10 +179,11 @@ namespace DotNetStockListDemo
             ArrayList cells = new ArrayList();
             foreach (KeyValuePair<int, string> entry in values.ChangedFieldsByPosition)
             {
-                
+
                 DataGridViewCell cell = row.Cells[entry.Key - 1];
-                
-                switch (entry.Key - 1) {
+
+                switch (entry.Key - 1)
+                {
                     case 1: // last_price          
                     case 5: // bid
                     case 6: // ask
@@ -210,31 +212,40 @@ namespace DotNetStockListDemo
                         cell.Value = dtVal;
                         break;
 
-                    default: // stock_name, ...
+                    case 0: // stock_name, ...
                         cell.Value = entry.Value;
                         break;
+
+                    default:
+                        break;
                 }
-                
+
                 // cell.Value = entry.Value;
 
                 if (blinkEnabled)
                 {
-                    cell.Style.BackColor = blinkOnColor;
-                    cells.Add(cell);
+                    if (cell.ColumnIndex < 12)
+                    {
+                        cell.Style.BackColor = blinkOnColor;
+                        cells.Add(cell);
+                    }
+                    
                 }
             }
 
             dataGridview.ResumeLayout();
 
-            if (blinkEnabled) {
+            if (blinkEnabled)
+            {
                 long now = DateTime.Now.Ticks;
                 ScheduleBlinkOff(cells, now);
             }
         }
 
-        private void OnLightstreamerStatusChanged(int cStatus, string status) {
+        private void OnLightstreamerStatusChanged(int cStatus, string status)
+        {
             statusLabel.Text = status;
-            
+
 
             switch (cStatus)
             {
@@ -243,11 +254,12 @@ namespace DotNetStockListDemo
                     if (status.Contains("HTTP"))
                     {
                         lblStatus.Text = "HTTP";
-                    } else
+                    }
+                    else
                     {
                         lblStatus.Text = "WS";
                     }
-                    
+
                     break;
                 case StocklistConnectionListener.POLLING:
                     lblStatus.BackColor = Color.GreenYellow;
@@ -268,7 +280,8 @@ namespace DotNetStockListDemo
             this.Refresh();
         }
 
-        private void CleanGrid() {
+        private void CleanGrid()
+        {
             for (int row = 0; row < dataGridview.Rows.Count; row++)
             {
                 for (int col = 0; col < dataGridview.Rows[row].Cells.Count; col++)
@@ -278,19 +291,24 @@ namespace DotNetStockListDemo
             }
         }
 
-        private class BlinkingCell {
+        private class BlinkingCell
+        {
             public readonly DataGridViewCell cell;
             public readonly long timestamp;
 
-            public BlinkingCell(DataGridViewCell dataGridviewCell, long blinkOnTimestamp) {
+            public BlinkingCell(DataGridViewCell dataGridviewCell, long blinkOnTimestamp)
+            {
                 cell = dataGridviewCell;
                 timestamp = blinkOnTimestamp;
             }
         }
 
-        private void ScheduleBlinkOff(ArrayList cells, long blinkOnTimestamp) {
-            lock (blinkingCells) {
-                for (int j = 0; j < cells.Count; j++) {
+        private void ScheduleBlinkOff(ArrayList cells, long blinkOnTimestamp)
+        {
+            lock (blinkingCells)
+            {
+                for (int j = 0; j < cells.Count; j++)
+                {
                     DataGridViewCell cell = (DataGridViewCell)cells[j];
 
                     blinkingCells.Add(new BlinkingCell(cell, blinkOnTimestamp));
@@ -300,23 +318,28 @@ namespace DotNetStockListDemo
             }
         }
 
-        private void BlinkOff(DataGridViewCell[] cells) {
+        private void BlinkOff(DataGridViewCell[] cells)
+        {
             dataGridview.SuspendLayout();
 
-            for (int i = 0; i < cells.Length; i++) {
+            for (int i = 0; i < cells.Length; i++)
+            {
                 cells[i].Style.BackColor = blinkOffColor;
             }
 
             dataGridview.ResumeLayout();
         }
 
-        private void DeblinkingThread() {
+        private void DeblinkingThread()
+        {
             ArrayList expiredBlinkingCells = new ArrayList();
 
-            do {
+            do
+            {
                 expiredBlinkingCells.Clear();
 
-                lock (blinkingCells) {
+                lock (blinkingCells)
+                {
                     if (blinkingCells.Count == 0)
                         Monitor.Wait(blinkingCells);
 
@@ -325,7 +348,8 @@ namespace DotNetStockListDemo
                 }
 
                 DataGridViewCell[] cells = new DataGridViewCell[expiredBlinkingCells.Count];
-                for (int i = 0; i < expiredBlinkingCells.Count; i++) {
+                for (int i = 0; i < expiredBlinkingCells.Count; i++)
+                {
                     cells[i] = ((BlinkingCell)expiredBlinkingCells[i]).cell;
                 }
 
@@ -341,29 +365,36 @@ namespace DotNetStockListDemo
             } while (true);
         }
 
-#region System Menu API
+        #region System Menu API
 
-        public int GetSysMenuHandle(int frmHandle) {
+        public int GetSysMenuHandle(int frmHandle)
+        {
             return GetSystemMenu(frmHandle, false);
         }
-        
-        private long RemoveSysMenu(int mnuHandle, int mnuPosition) {
+
+        private long RemoveSysMenu(int mnuHandle, int mnuPosition)
+        {
             return RemoveMenu(mnuHandle, mnuPosition, MF_REMOVE);
         }
-        
-        private long AppendSysMenu(int mnuHandle, int MenuID, string mnuText) {
+
+        private long AppendSysMenu(int mnuHandle, int MenuID, string mnuText)
+        {
             return AppendMenuA(mnuHandle, 0, MenuID, mnuText);
         }
-        
-        private long AppendSeperator(int mnuHandle) {
+
+        private long AppendSeperator(int mnuHandle)
+        {
             return AppendMenuA(mnuHandle, MF_SEPERATOR, 0, null);
         }
 
-        public bool PreFilterMessage(ref Message msg) {
-            switch (msg.Msg) {
+        public bool PreFilterMessage(ref Message msg)
+        {
+            switch (msg.Msg)
+            {
                 case WM_KEYDOWN:
                     Keys key = ((Keys)msg.WParam.ToInt32()) & Keys.KeyCode;
-                    switch (key) {
+                    switch (key)
+                    {
                         case Keys.F12:
                             AddBlinkMenu();
                             break;
@@ -372,12 +403,15 @@ namespace DotNetStockListDemo
             }
 
             return false;
-        } 
-        
-        protected override void WndProc(ref Message messg) {
-            switch (messg.Msg) {
+        }
+
+        protected override void WndProc(ref Message messg)
+        {
+            switch (messg.Msg)
+            {
                 case WM_SYSCOMMAND:
-                    switch (messg.WParam.ToInt32()) {
+                    switch (messg.WParam.ToInt32())
+                    {
                         case 54321:
                             blinkEnabled = !blinkEnabled;
                             break;
@@ -385,8 +419,8 @@ namespace DotNetStockListDemo
                     break;
             }
 
-                base.WndProc(ref messg);
-            
+            base.WndProc(ref messg);
+
         }
 
         #endregion // System Menu API
@@ -406,6 +440,11 @@ namespace DotNetStockListDemo
         {
             stocklistClient.MaxFrequency(trackBar1.Value);
         }
-    }
 
+        private void dataGridview_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ChartQuotes cq = new ChartQuotes("item" + (e.RowIndex + 1), dataGridview.Rows[e.RowIndex].Cells[0].Value.ToString(), stocklistClient);
+            cq.Show();
+        }
+    }
 }
