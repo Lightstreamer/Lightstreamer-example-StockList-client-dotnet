@@ -1,5 +1,6 @@
 ﻿using com.lightstreamer.client;
 using System;
+using System.Globalization;
 
 namespace DotNetStockListDemo
 {
@@ -49,7 +50,8 @@ namespace DotNetStockListDemo
             {
                 lock (chartForm.quotessource)
                 {
-                    double tmp = Double.Parse(itemUpdate.getValue("last_price"));
+                    CultureInfo culture = new CultureInfo("en-US");
+                    double tmp = Double.Parse(itemUpdate.getValue("last_price"), culture);
                     if (chartForm.quotessource.Count > 5000)
                     {
                         chartForm.quotessource.RemoveAt(0);
