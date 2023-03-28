@@ -76,6 +76,6 @@ You should complete this project with the [Lightstreamer .NET Standard Client li
 
 ## Lightstreamer Compatibility Notes
 
-* Compatible with Lightstreamer .NET Standard Client Library version 5.0.0 or newer.
+* Compatible with Lightstreamer .NET Standard Client Library version 5.x.
 * Ensure that .NET Standard Client API is supported by your Lightstreamer Server license configuration.
 * For instructions compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/tree/deploy2)
