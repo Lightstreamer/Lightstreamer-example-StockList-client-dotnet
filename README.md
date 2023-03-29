@@ -33,7 +33,13 @@ Each new Chart form involves a new Subscription in order to be totally released 
 
 ## Install 
 
-<i>coming soon ...</i>
+If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
+
+* Note that, as prerequisite, a windows system is required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
+* Launch Lightstreamer Server.
+* Download the `publish.zip` file that you can find in the [latest release](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract it in your local file system.
+* Execute `StockListDemo.exe` and enjoy it.
+
 
 ## Build
 
@@ -51,7 +57,7 @@ The Visual Studio project provided in this project was created from the 'Windows
 <!-- END RELATED_ENTRIES -->
 ### Related Projects
 
-* [Lightstreamer .NET Standard Client SDK](https://github.com/Lightstreamer/Lightstreamer-lib-client-dotnet)
+* [Lightstreamer .NET Standard Client SDK](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client)
 * [Lightstreamer - Stock-List Demos - HTML Clients](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-client-javascript)
 * [Lightstreamer - Basic Stock-List Demo - jQuery (jqGrid) Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-jquery)
 * [Lightstreamer - Basic Stock-List Demo - Java SE (Swing) Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-java)
