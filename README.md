@@ -10,6 +10,7 @@ This project contains a full example of a .NET Framework client application that
 
 ### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](https://demos.lightstreamer.com/DotNetDemo/publish.zip)<br>
 (download publish.zip; unzip it; launch StockListDemo.exe; enjoy)
+*Requires net6.0 to be installed on the local system*
 
 ## Details
 
@@ -35,7 +36,7 @@ Each new Chart form involves a new Subscription in order to be totally released 
 
 If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
 
-* Note that, as prerequisite, a windows system is required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
+* Note that, as prerequisite, a windows system and .NET 6.0 are required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
 * Launch Lightstreamer Server.
 * Download the `publish.zip` file that you can find in the [latest release](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract it in your local file system.
 * Execute `StockListDemo.exe` and enjoy it.
