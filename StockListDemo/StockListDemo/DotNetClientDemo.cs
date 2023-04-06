@@ -28,7 +28,7 @@ namespace DotNetStockListDemo
 
         [STAThread]
         static void Main(string[] args) {
-            string pushServerHost = "https://push.lightstreamer.com";
+            string pushServerHost = "https://push.lightstreamer.com/";
             int pushServerPort = 0;
             string forceTransport = "no";
 

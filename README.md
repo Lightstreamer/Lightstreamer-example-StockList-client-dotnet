@@ -6,10 +6,10 @@ This project contains a full example of a .NET Framework client application that
 
 ## Live Demo
 
-[![screenshot](screen_dotnet_large.png)](https://demos.lightstreamer.com/DotNetDemo/deploy_push.zip)<br>
+[![screenshot](screen_dotnet_large.png)](https://demos.lightstreamer.com/DotNetDemo/publish.zip)<br>
 
-### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](https://demos.lightstreamer.com/DotNetDemo/deploy_push.zip)<br>
-(download deploy_push.zip; unzip it; launch setup.exe; follow the instructions)
+### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](https://demos.lightstreamer.com/DotNetDemo/publish.zip)<br>
+(download publish.zip; unzip it; launch StockListDemo.exe; enjoy)
 
 ## Details
 
