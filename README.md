@@ -2,15 +2,15 @@
 
 <!-- START DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
-This project contains a full example of a .NET Framework client application that employs the [.NET Standard client API for Lightstreamer](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/).
+This project contains a full example of a Windows Forms client application that leverages the [.NET Standard client API for Lightstreamer](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/).
 
 ## Live Demo
 
 [![screenshot](screen_dotnet_large.png)](https://demos.lightstreamer.com/DotNetDemo/publish.zip)<br>
 
 ### [![](http://demos.lightstreamer.com/site/img/play.png) View live demo](https://demos.lightstreamer.com/DotNetDemo/publish.zip)<br>
-(download publish.zip; unzip it; launch StockListDemo.exe; enjoy)
-*Requires net6.0 to be installed on the local system*
+(download publish.zip; unzip it; launch StockListDemo.exe; enjoy)<br>
+*(Requires net6.0 to be installed on the local system)*
 
 ## Details
 
@@ -19,16 +19,16 @@ This is a .NET desktop version of the [Lightstreamer - Basic Stock-List Demo - H
 This app uses the <b>.NET Standard Client API for Lightstreamer</b> to handle the communications with Lightstreamer Server. A simple user interface is implemented to display the real-time data received from Lightstreamer Server.
 The application uses a grid to display the real-time data. You can resize and drag the columns around.
 <br>
-This application uses the LightstreamerClient class to connect to Lightstreamer Server and subscribe to the 30 items. The client library offers auto-reconnection and auto-resubscription logic out of the box. The status of the connection can be seen on the top right corener or in the bottom statys bar of the demo. 
+This application uses the LightstreamerClient class to connect to Lightstreamer Server and subscribe to the 30 items. The client library offers auto-reconnection and auto-resubscription logic out of the box. The status of the connection can be seen on the top right corener or in the bottom status bar of the demo. 
 A *DataGridview* object from System.Windows.Forms is used to display the real-time updates received from Lightstreamer Server. The application code implements a cell highlighting mechanism, too.
 
 At the top right of the form there are few controls that allow you to:
- * dynamically  change the transport over which the client session with the Lightstremer server is based;
- * reset the connection with the Lightstreamer server  to force a new client session;
- * dynamically  change the max updates frequency allowed for the subscription, varying from unlimited to 1 update every 100 seconds.
+ * dynamically change the transport over which the client session with the Lightstremer server is based;
+ * reset the connection with the Lightstreamer server to force a new client session;
+ * dynamically change the max updates frequency allowed for the subscription, varying from unlimited to 1 update every 100 seconds.
 
 Double-clicking on the last column a new Form will be shown with a *Chart* object from System.Windows.Forms.DataVisualization drawing a real-time serie for the quotes of the related stock.
-Each new Chart form involves a new Subscription in order to be totally released from any limitation on the frequency of updates imposed on the main subscription of the grid. 
+Each new Chart form involves a new Subscription in order to be totally released from any limitation on the frequency of updates imposed on the subscription of the main grid. 
 
 <!-- END DESCRIPTION lightstreamer-example-stocklist-client-dotnet -->
 
@@ -36,7 +36,8 @@ Each new Chart form involves a new Subscription in order to be totally released 
 
 If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
 
-* Note that, as prerequisite, a windows system and .NET 6.0 are required and the [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
+* Note that, as prerequisite, a windows system and [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) are required.
+* The [Lightstreamer - Stock- List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Stocklist-adapter-java) has to be deployed on your local Lightstreamer Server instance. Please check out that project and follow the installation instructions provided with it.
 * Launch Lightstreamer Server.
 * Download the `publish.zip` file that you can find in the [latest release](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet/releases) of this project and extract it in your local file system.
 * Execute `StockListDemo.exe` and enjoy it.
@@ -44,7 +45,7 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 ## Build
 
-The Visual Studio project provided in this project was created from the 'Windows Forms App' template and specify as target framework: .NET 6.0.
+The Visual Studio project provided was created from the 'Windows Forms App' template and specify as target framework .NET 6.0.
 
 ## See Also
 
