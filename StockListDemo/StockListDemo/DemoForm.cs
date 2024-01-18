@@ -75,6 +75,12 @@ namespace DotNetStockListDemo
             blinkEnabled = true;
             blinkMenu = false;
 
+            if (pushServerHost == null || pushServerHost.Length == 0)
+            {
+                pushServerHost = "localhost";
+                pushServerPort = 8080;
+            }
+
             if (pushServerHost.StartsWith("http") || pushServerHost.StartsWith("HTTP"))
             {
                 pushServerUrl = pushServerHost;
